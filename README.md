@@ -70,7 +70,7 @@ image.save("generated_city.jpg")
 Our model is able to synthesize based on high-level geography of a region:
 
 <div align="center">
-<img src="imgs/location_sample_2.jpg" width=350></img>
+<img src="imgs/location_sample_2.jpg"></img>
 </div>
 
 ## 🧑‍💻 Setup and Training
