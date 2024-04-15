@@ -1,7 +1,10 @@
 # GeoSynth
 
-This repository is the official implementation of [GeoSynth](https://arxiv.org/abs/2404.06637) [CVPRW, EarthVision, 2024].
-GeoSynth is a suite of models for synthesizing satellite images with global style and image-driven layout control.
+<center><img src="imgs/geosynth_logo.png" width="200">
+
+[![arXiv](https://img.shields.io/badge/arXiv-2404.06637-red?style=flat&label=arXiv)](https://arxiv.org/abs/2404.06637)
+[![Project Page](https://img.shields.io/badge/Project-Website-green)]()
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Spaces-yellow?style=flat&logo=hug)](https://huggingface.co/spaces/MVRL/GeoSynth)</center>
 
 **[GeoSynth: Contextually-Aware High-Resolution Satellite Image Synthesis](https://arxiv.org/abs/2404.06637)** 
 </br>
@@ -11,11 +14,15 @@ GeoSynth is a suite of models for synthesizing satellite images with global styl
 [Nathan Jacobs](https://jacobsn.github.io/)
 (*Corresponding Author)
 
-[![arXiv](https://img.shields.io/badge/arXiv-2404.06637-red?style=flat&label=arXiv)](https://arxiv.org/abs/2404.06637)
-[![Project Page](https://img.shields.io/badge/Project-Website-green)]()
-[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Spaces-yellow?style=flat&logo=hug)](https://huggingface.co/spaces/MVRL/GeoSynth)
+This repository is the official implementation of [GeoSynth](https://arxiv.org/abs/2404.06637) [CVPRW, EarthVision, 2024].
+GeoSynth is a suite of models for synthesizing satellite images with global style and image-driven layout control.
 
-Models available on 🤗 HuggingFace:
+![](imgs/teaser_v2.jpg)
+
+Models available in 🤗 HuggingFace diffusers:
+
+GeoSynth: [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Models-yellow?style=flat&logo=hug
+)](https://huggingface.co/MVRL/GeoSynth)
 
 GeoSynth-OSM: [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Models-yellow?style=flat&logo=hug
 )](https://huggingface.co/MVRL/GeoSynth-OSM)
@@ -34,6 +41,34 @@ All model `ckpt` files available here - [Link](#model-zoo)
 - [x] Release PyTorch `ckpt` files for all models
 - [x] Release GeoSynth Models to 🤗 HuggingFace
 
+## 🌏 Inference
+Example inference using 🤗 HuggingFace pipeline:
+```python
+from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
+import torch
+from PIL import Image
+
+img = Image.open("osm_tile_18_42048_101323.jpeg")
+
+controlnet = ControlNetModel.from_pretrained("MVRL/GeoSynth-OSM")
+
+pipe = StableDiffusionControlNetPipeline.from_pretrained("stabilityai/stable-diffusion-2-1-base", controlnet=controlnet)
+pipe = pipe.to("cuda:0")
+
+# generate image
+generator = torch.manual_seed(10345340)
+image = pipe(
+    "Satellite image features a city neighborhood",
+    generator=generator,
+    image=img,
+).images[0]
+
+image.save("generated_city.jpg")
+```
+## 🧑‍💻 Setup and Training
+
+Look at [train.md]() for details on setting up the environment and training models on your own data.
+
 ## 🐨 Model Zoo
 Download GeoSynth models from the given links below:
 
@@ -41,12 +76,12 @@ Download GeoSynth models from the given links below:
 |----------|--------|----------|
 |-|❌|[Link](https://huggingface.co/MVRL/GeoSynth/blob/main/sd-base-geosynth.ckpt)|
 |OSM|❌|[Link](https://huggingface.co/MVRL/GeoSynth-OSM/blob/main/geosynth-osm-text.ckpt)|
-|SAM|❌| [Link](https://huggingface.co/MVRL/GeoSynth-SAM)|
-|Canny|❌| [Link](https://huggingface.co/MVRL/GeoSynth-Canny)|
-|-|✅|[Link](https://wustl.box.com/s/o1ooaunhaym7v1qj3yzj3vof0lskxyha)|
-|OSM|✅|[Link](https://wustl.box.com/s/fudo44eznjwejcp3vql14by20rqqayfy)|
-|SAM|✅| [Link](https://wustl.box.com/s/xuezslrnjxyz1d1ngtzvnm5ck2il4nx8)|
-|Canny|✅| [Link](https://wustl.box.com/s/c3nfbdmcigiogqskemyc4h5soveiya8n)|
+|SAM|❌| [Link](https://huggingface.co/MVRL/GeoSynth-SAM/blob/main/geosynth_sam.ckpt)|
+|Canny|❌| [Link](https://huggingface.co/MVRL/GeoSynth-Canny/blob/main/geosynth_canny_text-v1.ckpt)|
+|-|✅|[Link](https://huggingface.co/MVRL/GeoSynth-Location/blob/main/geosynth_sd_loc-v3.ckpt)|
+|OSM|✅|[Link](https://huggingface.co/MVRL/GeoSynth-Location/blob/main/geosynth_osm_text_loc-v2.ckpt)|
+|SAM|✅| [Link]()|
+|Canny|✅| [Link](https://huggingface.co/MVRL/GeoSynth-Location-Canny/blob/main/geosynth_loc_canny.ckpt)|
 
 
 ## 📑 Citation
