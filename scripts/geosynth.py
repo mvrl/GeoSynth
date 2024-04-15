@@ -17,7 +17,6 @@ from ..ControlNet.ldm.modules.diffusionmodules.openaimodel import UNetModel, Tim
 from ..ControlNet.ldm.models.diffusion.ddpm import LatentDiffusion
 from ..ControlNet.ldm.util import log_txt_as_img, exists, instantiate_from_config
 from ..ControlNet.ldm.models.diffusion.ddim import DDIMSampler
-from ..ControlNet.cldm.cldm import ControlLDM as ControlLDMBase
 
 
 class LocationEncoder(nn.Module):
@@ -44,6 +43,7 @@ class LocationEncoder(nn.Module):
 class ControlledUnetModel(UNetModel):
     def forward(self, x, timesteps=None, context=None, control=None, location=None, only_mid_control=False, **kwargs):
         hs = []
+        #import code; code.interact(local=locals());
         with torch.no_grad():
             t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False)
             emb = self.time_embed(t_emb)
@@ -348,7 +348,7 @@ class ControlNet(nn.Module):
         return outs, locs
 
 
-class ControlLDM(ControlLDMBase):
+class ControlLDM(LatentDiffusion):
 
     def __init__(self, control_stage_config, control_key, only_mid_control, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -452,3 +452,32 @@ class ControlLDM(ControlLDMBase):
             log[f"samples_cfg_scale_{unconditional_guidance_scale:.2f}"] = x_samples_cfg
 
         return log
+
+    @torch.no_grad()
+    def sample_log(self, cond, batch_size, ddim, ddim_steps, **kwargs):
+        ddim_sampler = DDIMSampler(self)
+        b, c, h, w = cond["c_concat"][0].shape
+        shape = (self.channels, h // 8, w // 8)
+        samples, intermediates = ddim_sampler.sample(ddim_steps, batch_size, shape, cond, verbose=False, **kwargs)
+        return samples, intermediates
+
+    def configure_optimizers(self):
+        lr = self.learning_rate
+        params = list(self.control_model.parameters())
+        if not self.sd_locked:
+            params += list(self.model.diffusion_model.output_blocks.parameters())
+            params += list(self.model.diffusion_model.out.parameters())
+        opt = torch.optim.AdamW(params, lr=lr)
+        return opt
+
+    def low_vram_shift(self, is_diffusing):
+        if is_diffusing:
+            self.model = self.model.cuda()
+            self.control_model = self.control_model.cuda()
+            self.first_stage_model = self.first_stage_model.cpu()
+            self.cond_stage_model = self.cond_stage_model.cpu()
+        else:
+            self.model = self.model.cpu()
+            self.control_model = self.control_model.cpu()
+            self.first_stage_model = self.first_stage_model.cuda()
+            self.cond_stage_model = self.cond_stage_model.cuda()
