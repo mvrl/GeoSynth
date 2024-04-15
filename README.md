@@ -1,18 +1,17 @@
-# GeoSynth
-
-<center><img src="imgs/geosynth_logo.png" width="200">
+# GeoSynth: Contextually-Aware High-Resolution Satellite Image Synthesis
+<div align="center">
+<img src="imgs/geosynth_logo.png" width="200">
 
 [![arXiv](https://img.shields.io/badge/arXiv-2404.06637-red?style=flat&label=arXiv)](https://arxiv.org/abs/2404.06637)
 [![Project Page](https://img.shields.io/badge/Project-Website-green)]()
 [![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Spaces-yellow?style=flat&logo=hug)](https://huggingface.co/spaces/MVRL/GeoSynth)</center>
 
-**[GeoSynth: Contextually-Aware High-Resolution Satellite Image Synthesis](https://arxiv.org/abs/2404.06637)** 
-</br>
 [Srikumar Sastry*](https://sites.wustl.edu/srikumarsastry/),
 [Subash Khanal](https://subash-khanal.github.io/),
 [Aayush Dhakal](https://scholar.google.com/citations?user=KawjT_8AAAAJ&hl=en),
 [Nathan Jacobs](https://jacobsn.github.io/)
 (*Corresponding Author)
+</div>
 
 This repository is the official implementation of [GeoSynth](https://arxiv.org/abs/2404.06637) [CVPRW, EarthVision, 2024].
 GeoSynth is a suite of models for synthesizing satellite images with global style and image-driven layout control.
@@ -65,6 +64,15 @@ image = pipe(
 
 image.save("generated_city.jpg")
 ```
+
+## 📍 Geo-Awareness
+
+Our model is able to synthesize based on high-level geography of a region:
+
+<div align="center">
+<img src="imgs/location_sample_2.jpg" width=350></img>
+</div>
+
 ## 🧑‍💻 Setup and Training
 
 Look at [train.md]() for details on setting up the environment and training models on your own data.
