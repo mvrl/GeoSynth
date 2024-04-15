@@ -1,0 +1,3 @@
+[submodule "ControlNet"]
+	path = ControlNet
+	url = https://github.com/lllyasviel/ControlNet.git
