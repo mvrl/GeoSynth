@@ -1,4 +1,4 @@
-name: control
+name: geosynth
 channels:
   - pytorch
   - defaults
