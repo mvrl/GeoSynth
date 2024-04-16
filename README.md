@@ -98,12 +98,12 @@ Download GeoSynth models from the given links below:
 @inproceedings{sastry2024geosynth,
   title={GeoSynth: Contextually-Aware High-Resolution Satellite Image Synthesis},
   author={Sastry, Srikumar and Khanal, Subash and Dhakal, Aayush and Jacobs, Nathan},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)},
+  booktitle={IEEE/ISPRS Workshop: Large Scale Computer Vision for Remote Sensing (EARTHVISION),
   year={2024}
 }
 ```
 
 ## 🔍 Additional Links
-Check out our lab website for other interesting works on geospatial understanding and mapping;
+Check out our lab website for other interesting works on geospatial understanding and mapping:
 * Multi-Modal Vision Research Lab (MVRL) - [Link](https://mvrl.cse.wustl.edu/)
 * Related Works from MVRL - [Link](https://mvrl.cse.wustl.edu/publications/)
