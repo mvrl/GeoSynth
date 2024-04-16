@@ -1,6 +1,6 @@
 # GeoSynth: Contextually-Aware High-Resolution Satellite Image Synthesis
 <div align="center">
-<img src="imgs/geosynth_logo.png" width="200">
+<img src="imgs/geosynth_logo.png" width="250">
 
 [![arXiv](https://img.shields.io/badge/arXiv-2404.06637-red?style=flat&label=arXiv)](https://arxiv.org/abs/2404.06637)
 [![Project Page](https://img.shields.io/badge/Project-Website-green)]()
@@ -32,7 +32,7 @@ GeoSynth-SAM: [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%2
 GeoSynth-Canny: [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Models-yellow?style=flat&logo=hug
 )](https://huggingface.co/MVRL/GeoSynth-Canny)
 
-All model `ckpt` files available here - [Link](#model-zoo) 
+All model `ckpt` files available here - [Link](#🐨-model-zoo) 
 
 ## ⏭️ Next
 - [ ] Update Gradio demo
