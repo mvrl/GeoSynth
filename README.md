@@ -32,7 +32,7 @@ GeoSynth-SAM: [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%2
 GeoSynth-Canny: [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Models-yellow?style=flat&logo=hug
 )](https://huggingface.co/MVRL/GeoSynth-Canny)
 
-All model `ckpt` files available here - [Link](#🐨-model-zoo) 
+All model `ckpt` files available here - [Model Zoo](#🐨-model-zoo) 
 
 ## ⏭️ Next
 - [ ] Update Gradio demo
