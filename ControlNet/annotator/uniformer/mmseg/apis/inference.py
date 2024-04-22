@@ -8,7 +8,7 @@ from annotator.uniformer.mmseg.datasets.pipelines import Compose
 from annotator.uniformer.mmseg.models import build_segmentor
 
 
-def init_segmentor(config, checkpoint=None, device='cuda:0'):
+def init_segmentor(config, checkpoint=None, device="cuda:0"):
     """Initialize a segmentor from config file.
 
     Args:
@@ -24,15 +24,17 @@ def init_segmentor(config, checkpoint=None, device='cuda:0'):
     if isinstance(config, str):
         config = mmcv.Config.fromfile(config)
     elif not isinstance(config, mmcv.Config):
-        raise TypeError('config must be a filename or Config object, '
-                        'but got {}'.format(type(config)))
+        raise TypeError(
+            "config must be a filename or Config object, "
+            "but got {}".format(type(config))
+        )
     config.model.pretrained = None
     config.model.train_cfg = None
-    model = build_segmentor(config.model, test_cfg=config.get('test_cfg'))
+    model = build_segmentor(config.model, test_cfg=config.get("test_cfg"))
     if checkpoint is not None:
-        checkpoint = load_checkpoint(model, checkpoint, map_location='cpu')
-        model.CLASSES = checkpoint['meta']['CLASSES']
-        model.PALETTE = checkpoint['meta']['PALETTE']
+        checkpoint = load_checkpoint(model, checkpoint, map_location="cpu")
+        model.CLASSES = checkpoint["meta"]["CLASSES"]
+        model.PALETTE = checkpoint["meta"]["PALETTE"]
     model.cfg = config  # save the config in the model for convenience
     model.to(device)
     model.eval()
@@ -53,16 +55,16 @@ class LoadImage:
             dict: ``results`` will be returned containing loaded image.
         """
 
-        if isinstance(results['img'], str):
-            results['filename'] = results['img']
-            results['ori_filename'] = results['img']
+        if isinstance(results["img"], str):
+            results["filename"] = results["img"]
+            results["ori_filename"] = results["img"]
         else:
-            results['filename'] = None
-            results['ori_filename'] = None
-        img = mmcv.imread(results['img'])
-        results['img'] = img
-        results['img_shape'] = img.shape
-        results['ori_shape'] = img.shape
+            results["filename"] = None
+            results["ori_filename"] = None
+        img = mmcv.imread(results["img"])
+        results["img"] = img
+        results["img_shape"] = img.shape
+        results["ori_shape"] = img.shape
         return results
 
 
@@ -90,7 +92,7 @@ def inference_segmentor(model, img):
         # scatter to specified GPU
         data = scatter(data, [device])[0]
     else:
-        data['img_metas'] = [i.data[0] for i in data['img_metas']]
+        data["img_metas"] = [i.data[0] for i in data["img_metas"]]
 
     # forward the model
     with torch.no_grad():
@@ -98,14 +100,16 @@ def inference_segmentor(model, img):
     return result
 
 
-def show_result_pyplot(model,
-                       img,
-                       result,
-                       palette=None,
-                       fig_size=(15, 10),
-                       opacity=0.5,
-                       title='',
-                       block=True):
+def show_result_pyplot(
+    model,
+    img,
+    result,
+    palette=None,
+    fig_size=(15, 10),
+    opacity=0.5,
+    title="",
+    block=True,
+):
     """Visualize the segmentation results on the image.
 
     Args:
@@ -124,10 +128,9 @@ def show_result_pyplot(model,
         block (bool): Whether to block the pyplot figure.
             Default is True.
     """
-    if hasattr(model, 'module'):
+    if hasattr(model, "module"):
         model = model.module
-    img = model.show_result(
-        img, result, palette=palette, show=False, opacity=opacity)
+    img = model.show_result(img, result, palette=palette, show=False, opacity=opacity)
     # plt.figure(figsize=fig_size)
     # plt.imshow(mmcv.bgr2rgb(img))
     # plt.title(title)

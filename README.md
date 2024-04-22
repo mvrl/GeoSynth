@@ -75,7 +75,7 @@ Our model is able to synthesize based on high-level geography of a region:
 
 ## 🧑‍💻 Setup and Training
 
-Look at [train.md]() for details on setting up the environment and training models on your own data.
+Look at [train.md](/scripts/train.md) for details on setting up the environment and training models on your own data.
 
 ## 🐨 Model Zoo
 Download GeoSynth models from the given links below:

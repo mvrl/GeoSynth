@@ -4,7 +4,8 @@
 # 3rd Edited by ControlNet
 
 import os
-os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
+
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import torch
 import numpy as np
@@ -25,6 +26,7 @@ class OpenposeDetector:
 
         if not os.path.exists(hand_modelpath):
             from basicsr.utils.download_util import load_file_from_url
+
             load_file_from_url(body_model_path, model_dir=annotator_ckpts_path)
             load_file_from_url(hand_model_path, model_dir=annotator_ckpts_path)
 
@@ -41,9 +43,13 @@ class OpenposeDetector:
                 hands_list = util.handDetect(candidate, subset, oriImg)
                 all_hand_peaks = []
                 for x, y, w, is_left in hands_list:
-                    peaks = self.hand_estimation(oriImg[y:y+w, x:x+w, :])
-                    peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
-                    peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
+                    peaks = self.hand_estimation(oriImg[y : y + w, x : x + w, :])
+                    peaks[:, 0] = np.where(
+                        peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x
+                    )
+                    peaks[:, 1] = np.where(
+                        peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y
+                    )
                     all_hand_peaks.append(peaks)
                 canvas = util.draw_handpose(canvas, all_hand_peaks)
             return canvas, dict(candidate=candidate.tolist(), subset=subset.tolist())

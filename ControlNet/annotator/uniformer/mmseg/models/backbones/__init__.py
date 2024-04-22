@@ -1,4 +1,5 @@
 from .cgnet import CGNet
+
 # from .fast_scnn import FastSCNN
 from .hrnet import HRNet
 from .mobilenet_v2 import MobileNetV2
@@ -11,7 +12,16 @@ from .vit import VisionTransformer
 from .uniformer import UniFormer
 
 __all__ = [
-    'ResNet', 'ResNetV1c', 'ResNetV1d', 'ResNeXt', 'HRNet',
-    'ResNeSt', 'MobileNetV2', 'UNet', 'CGNet', 'MobileNetV3',
-    'VisionTransformer', 'UniFormer'
+    "ResNet",
+    "ResNetV1c",
+    "ResNetV1d",
+    "ResNeXt",
+    "HRNet",
+    "ResNeSt",
+    "MobileNetV2",
+    "UNet",
+    "CGNet",
+    "MobileNetV3",
+    "VisionTransformer",
+    "UniFormer",
 ]
