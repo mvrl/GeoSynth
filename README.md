@@ -74,7 +74,7 @@ Our model is able to synthesize based on high-level geography of a region:
 </div>
 
 ## 🧑‍💻 Setup and Training
-Style for OSM imagery is created using MapBox. The style file can be downloaded from [here](https://wustl.box.com/s/087sja3r137jotfbmy99svcysaamhsir). The dataset can be downloaded from [here](https://wustl.box.com/s/lxuopink74nf32u869v7ea42jlh6jkck).
+Style for OSM imagery is created using MapBox. The style file can be downloaded from [here](https://wustl.box.com/s/jifuu4otdxnli340pu1k5ea37ku1p71c). The dataset can be downloaded from [here](https://wustl.box.com/s/epgjl8v4myaeo3q64sh1tn3cea5w5vke).
 Look at [train.md](/scripts/train.md) for details on setting up the environment and training models on your own data.
 
 ## 🐨 Model Zoo
