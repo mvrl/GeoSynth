@@ -4,7 +4,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2404.06637-red?style=flat&label=arXiv)](https://arxiv.org/abs/2404.06637)
 [![Project Page](https://img.shields.io/badge/Project-Website-green)](https://vishu26.github.io/geosynth/index.html)
-[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Spaces-yellow?style=flat&logo=hug)](https://huggingface.co/spaces/MVRL/GeoSynth)</center>
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Spaces-yellow?style=flat&logo=hug)](https://huggingface.co/MVRL/GeoSynth)</center>
 
 [Srikumar Sastry*](https://sites.wustl.edu/srikumarsastry/),
 [Subash Khanal](https://subash-khanal.github.io/),
